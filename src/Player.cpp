@@ -8,7 +8,7 @@ Player::~Player() {
   //place holder
 }
 
-void Player::init(int xi, int yi, int forehand, 
+void Player::init(double xi, double yi, int forehand, 
 		  int backhand, float spd,
 		  float accel, int decel,
 		  int agil, int aware,
@@ -31,6 +31,22 @@ void Player::init(int xi, int yi, int forehand,
   foulingRate = foulCallRate = 0;  //@TODO
   
   //@TODO create function to calculate cutting ability
+}
+
+double Player::getX() {
+  return x; 
+}
+
+double Player::getY() {
+  return y;
+}
+
+int Player::getBodyFacing() {
+  return bodyDirection; 
+}
+
+int Player::getSightFacing() {
+  return sightDirection;
 }
 
 bool Player::toss(Player* target) {

@@ -5,8 +5,8 @@ class Player {
   private:
     const static float width = .5; //the width of an average player. (in meters)
     const static float depth = 1.0/3.0; //the depth of an average player - front to back
-    int x;		 //Player x location in meters
-    int y;		 //Player y location in meters
+    double x;		 //Player x location in meters
+    double y;		 //Player y location in meters
     int height;  	 //Player's height.  May be used for layout function...
     int cuttingAbility;  //0-10 discreet, arbitrary stat
     int forehandAbility; //0-10 discreet, arbitrary stat
@@ -26,11 +26,17 @@ class Player {
     Player();
     ~Player();
 
-    void init(int xi = 20, int yi = 20, int forehand = 10, 
+    void init(double xi = 20, double yi = 20, int forehand = 10, 
 	      int backhand = 10, float spd = 3.0,
               float accel = 1.0, int decel = 2.0,
 	      int agil = 60, int aware = 60,
 	      int cutShrp = 150);
+
+   //getters
+    double getX();
+    double getY();
+    int getBodyFacing();
+    int getSightFacing();
 
     bool cut(/*int direction, //0-360
 	     int sharpness, //0-cutSharpness max

@@ -1,10 +1,13 @@
 #include <GL/glut.h>
 #include <stdio.h>
 #include <iostream>
+#include "Player.h"
+#include "math.h"
 
 void init();
 void display();
 void drawField();
+void drawPlayer(Player* p);
 
 int main(int argc, char** argv) {
   glutInit(&argc, argv);
@@ -45,6 +48,8 @@ void display() {
   glClear(GL_COLOR_BUFFER_BIT);  // clear all pixels
   glColor3f(1.0, 1.0, 1.0); // r g b
   drawField();
+  Player* test = new Player();
+  drawPlayer(test);
   glFlush();
 }
 
@@ -59,6 +64,26 @@ void drawField() {
   glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
   glDrawArrays(GL_QUADS,0,4);
   glDrawArrays(GL_LINES,4,8);
+}
+
+void drawPlayer(Player* p) {
+  //takes an x and y location ON THE FIELD in METERS.  
+  double xCenter = p->getX();
+  double yCenter = p->getY();
+  //convert co-ords to actual screen coordinates.  
+  xCenter = (xCenter*2)+16;  
+  yCenter = (yCenter*2)+100;
+  double radius = 1;
+  double PI = 3.14159265;
+  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+  glColor3f(1.0, 0.0, 0.0);
+  glBegin(GL_TRIANGLE_FAN);
+    glVertex2f(xCenter, yCenter);
+    for(int i = 0; i<18; i++) {
+      glVertex2f(xCenter+radius*cos((2*PI*i)/18),yCenter+radius*sin((2*PI*i)/18)); 
+    }
+    glVertex2f(xCenter+radius,yCenter);
+  glEnd();
 }
 
 
