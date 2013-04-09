@@ -1,9 +1,13 @@
+#ifndef __PLAYER_H__
+#define __PLAYER_H__
+
 class Player {
   private:
-    const float width = .5; //the width of an average player.
-    const float depth = 1.0/3.0; //the depth of an average player - front to back
+    const static float width = .5; //the width of an average player. (in meters)
+    const static float depth = 1.0/3.0; //the depth of an average player - front to back
     int x;		 //Player x location in meters
     int y;		 //Player y location in meters
+    int height;  	 //Player's height.  May be used for layout function...
     int cuttingAbility;  //0-10 discreet, arbitrary stat
     int forehandAbility; //0-10 discreet, arbitrary stat
     int backhandAbility; //0-10 discreet, arbitrary stat
@@ -20,6 +24,19 @@ class Player {
     int foulCallRate;    //a % from 0-100.  if a player IS fouled, what is the rate that a player calls it?
   public:
     Player();
-    init();
-    
+    ~Player();
+
+    void init(int xi = 20, int yi = 20, int forehand = 10, 
+	      int backhand = 10, float spd = 3.0,
+              float accel = 1.0, int decel = 2.0,
+	      int agil = 60, int aware = 60,
+	      int cutShrp = 150);
+
+    bool cut(/*int direction, //0-360
+	     int sharpness, //0-cutSharpness max
+	     int xDestination,
+	     int yDestination @TODO*/);
+    bool toss(Player* target);
+    bool receiveThrow();
 };
+#endif
